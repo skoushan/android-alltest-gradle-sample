@@ -1,5 +1,14 @@
 evaluationDependsOn(":core")
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:0.14.1'
+    }
+}
+
 apply plugin: 'com.android.application'
 
 android {
@@ -27,6 +36,8 @@ android {
     }
 }
 
+apply plugin: 'spoon'
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':core')
@@ -35,4 +46,5 @@ dependencies {
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.1'
 }
