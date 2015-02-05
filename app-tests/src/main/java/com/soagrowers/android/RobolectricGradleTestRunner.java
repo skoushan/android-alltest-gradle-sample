@@ -3,6 +3,7 @@ package com.soagrowers.android;
 import org.junit.runners.model.InitializationError;
 import org.robolectric.AndroidManifest;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.SdkConfig;
 import org.robolectric.annotation.Config;
 import org.robolectric.res.Fs;
 
@@ -30,6 +31,20 @@ public class RobolectricGradleTestRunner extends RobolectricTestRunner {
     // Robolectric is already going to look in the  'app' dir ...
     // so no need to add to package name
     return manifest;
+  }
+
+  @Override
+  protected SdkConfig pickSdkVersion(AndroidManifest appManifest, Config config) {
+    try {
+      return super.pickSdkVersion(appManifest, config);
+    } catch (UnsupportedOperationException e) {
+      return new SdkConfig(MAX_SDK_SUPPORTED_BY_ROBOLECTRIC);
+    }
+  }
+
+  @Override
+  protected int pickReportedSdkVersion(Config config, AndroidManifest appManifest) {
+    return pickSdkVersion(appManifest, config).getApiLevel();
   }
 
     /*@Override
