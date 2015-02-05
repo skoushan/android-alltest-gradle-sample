@@ -16,7 +16,8 @@ public class RobolectricGradleTestRunner extends RobolectricTestRunner {
   @Override
   protected AndroidManifest getAppManifest(Config config) {
     //String appRoot = "D:\\TmpCodingProjects\\TripComputer\\app\\src\\main\\";
-    String appRoot = "../app/src/main/";
+    String projectRoot = System.getProperty("user.dir").replace("/app-tests", "");
+    String appRoot = projectRoot + "/app/src/main/";
     String manifestPath = appRoot + "AndroidManifest.xml";
     String resDir = appRoot + "res";
     String assetsDir = appRoot + "assets";
